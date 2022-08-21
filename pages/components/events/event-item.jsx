@@ -1,6 +1,8 @@
-import Link from "next/link";
-import Image from "next/image";
 import classes from "./event-item.module.css";
+import Button from "../ui/button";
+import CalendarMonthIcon from "@mui/icons-material/CalendarMonth";
+import LocationOnIcon from "@mui/icons-material/LocationOn";
+import ArrowRightAltIcon from "@mui/icons-material/ArrowRightAlt";
 
 function EventItem(props) {
   const { title, image, date, location, id } = props;
@@ -21,14 +23,23 @@ function EventItem(props) {
         <div className={classes.summary}>
           <h2>{title}</h2>
           <div className={classes.date}>
+            <CalendarMonthIcon />
             <time>{formattedDate}</time>
           </div>
           <div className={classes.address}>
+            <LocationOnIcon />
             <address>{formattedAddress}</address>
           </div>
         </div>
         <div className={classes.actions}>
-          <Link href={exploreLink}>ExploreEvent</Link>
+          <Button link={exploreLink}>
+            <div>
+              <span>Explore Event </span>
+              <span>
+                <ArrowRightAltIcon />
+              </span>
+            </div>
+          </Button>
         </div>
       </div>
     </li>
