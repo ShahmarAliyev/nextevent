@@ -1,21 +1,22 @@
-import Link from "next/link";
-export default function ProductList({ productId = 100 }) {
+import { useRouter } from "next/router";
+import { Fragment } from "react";
+import EventList from "../../components/events/event-list";
+import EventSearch from "../../components/events/events-search";
+import { getAllEvents } from "../../dummy-data";
+
+export default function AllEventsPage() {
+  const events = getAllEvents();
+  const router = useRouter();
+
+  function findEventsHandler(year, month) {
+    const fullPath = `/events/${year}/${month}`;
+    router.push(fullPath);
+  }
+
   return (
-    <>
-      <Link href="/product/1">
-        <a>
-          <h2>Product 1</h2>
-        </a>
-      </Link>
-      <Link href="/product/2">
-        <h2>Product 2</h2>
-      </Link>
-      <Link href={`/product/${productId}`}>
-        <h2>Product {productId}</h2>
-      </Link>
-      <Link href="/">
-        <a>go back to home page</a>
-      </Link>
-    </>
+    <Fragment>
+      <EventSearch onSearch={findEventsHandler} />
+      <EventList items={events} />
+    </Fragment>
   );
 }
